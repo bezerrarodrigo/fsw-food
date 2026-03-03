@@ -9,8 +9,8 @@ const Header = () => {
         src="/logo.png"
         alt="Logo"
         width={100}
-        loading="eager"
         height={30}
+        loading="eager"
       />
       <Button variant="outline" className="border-none bg-transparent">
         <MenuIcon className="w-6 h-6" />
