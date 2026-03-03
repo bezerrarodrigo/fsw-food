@@ -8,10 +8,11 @@ const ProductList = async () => {
         gt: 0,
       },
     },
+    take: 10,
   });
 
   return (
-    <div className="flex overflow-x-scroll gap-4">
+    <div className="flex overflow-x-scroll gap-4 [&::-webkit-scrollbar]:hidden px-5">
       {products.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}
