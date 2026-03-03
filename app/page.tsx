@@ -9,7 +9,7 @@ export default function Home() {
       <div className="px-5">
         <Search />
       </div>
-      <div className="px-5 py-6">
+      <div className="px-5 pt-6">
         <CategoryList />
       </div>
     </>

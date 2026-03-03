@@ -1,24 +1,15 @@
-import { Badge } from "@/components/ui/badge";
+import { Category } from "@/generated/prisma/browser";
 import { prisma } from "@/lib/prisma";
-import Image from "next/image";
+import CategoryItem from "./category-item";
 
 const CategoryList = async () => {
   const categories = await prisma.category.findMany();
 
   return (
-    <div className="flex gap-2">
-      {categories.map((category) => (
-        <Badge className="px-2 py-1" variant="secondary" key={category.id}>
-          <Image
-            className="w-9 h-9"
-            src={category.imageUrl}
-            alt={category.name}
-            width={50}
-            height={50}
-          />
-          <span>{category.name}</span>
-        </Badge>
-      ))}
+    <div className="grid grid-cols-2 gap-2">
+      {categories.map((category: Category) => {
+        return <CategoryItem category={category} key={category.id} />;
+      })}
     </div>
   );
 };
