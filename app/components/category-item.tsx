@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Category } from "@/generated/prisma/browser";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ interface CategoryItemProps {
 
 const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
-    <div className="flex gap-3 items-center bg-white shadow-sm rounded-full px-4 py-3">
+    <Badge className="shadow-sm bg-white" variant="ghost">
       <Image
         className="w-9 h-9"
         src={category.imageUrl}
@@ -15,8 +16,10 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
         width={30}
         height={30}
       />
-      <span className="font-semibold text-sm">{category.name}</span>
-    </div>
+      <span className="font-semibold text-sm text-muted-foreground">
+        {category.name}
+      </span>
+    </Badge>
   );
 };
 
