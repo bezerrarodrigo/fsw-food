@@ -5,8 +5,25 @@ import Header from "./components/header";
 import ProductList from "./components/products-list";
 import Search from "./components/search";
 import { Button } from "@/components/ui/button";
+import { prisma } from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  const products = await prisma.product.findMany({
+    where: {
+      discountPercentage: {
+        gt: 0,
+      },
+    },
+    take: 10,
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
   return (
     <>
       <Header />
@@ -34,7 +51,7 @@ export default function Home() {
             <ChevronRight size={16} />
           </Button>
         </div>
-        <ProductList />
+        <ProductList products={products} />
       </main>
     </>
   );
