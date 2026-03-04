@@ -1,16 +1,24 @@
 import { Badge } from "@/components/ui/badge";
-import { Product } from "@/generated/prisma/client";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { formatPrice } from "../helpers/price";
+import { Prisma } from "@/generated/prisma/client";
 
 interface ProductItemProps {
-  product: Product;
+  product: Prisma.ProductGetPayload<{
+    include: {
+      restaurant: {
+        select: {
+          name: true;
+        };
+      };
+    };
+  }>;
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className="w-37.5 space-y-2">
+    <div className="w-37.5 space-y-1">
       <div className="h-37.5 min-w-37.5 w-full relative">
         <Image
           className="object-cover rounded-lg shadow-md"
@@ -42,6 +50,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
           )}
         </div>
       </div>
+      <span className="text-muted-foreground text-xs block">
+        {product.restaurant.name}
+      </span>
     </div>
   );
 };
