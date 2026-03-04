@@ -28,9 +28,9 @@ export default function Home() {
           />
         </div>
         <div className="flex items-center justify-between px-5 mb-2">
-          <h2 className="font-semibold">Pedidos Recomendados</h2>
-          <Button variant="ghost" className="text-primary p-0">
-            Var todos
+          <p className="font-semibold">Pedidos Recomendados</p>
+          <Button variant="ghost" className="text-primary pr-0">
+            Ver todos
             <ChevronRight size={16} />
           </Button>
         </div>
