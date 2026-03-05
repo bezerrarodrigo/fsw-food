@@ -1,12 +1,12 @@
+import { Button } from "@/components/ui/button";
+import { prisma } from "@/lib/prisma";
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
 import CategoryList from "./components/category-list";
 import Header from "./components/header";
 import ProductList from "./components/products-list";
-import Search from "./components/search";
-import { Button } from "@/components/ui/button";
-import { prisma } from "@/lib/prisma";
 import PromoBanner from "./components/promo-banner";
+import Search from "./components/search";
+import RestaurantList from "./components/restaurant-list";
 
 export default async function Home() {
   const products = await prisma.product.findMany({
@@ -54,6 +54,16 @@ export default async function Home() {
             src="/banner-promo02.png"
             alt="Valores promocionais em hamburgers"
           />
+        </div>
+        <div className="flex items-center justify-between px-5 mb-2">
+          <p className="font-semibold">Restaurantes Recomendados</p>
+          <Button variant="ghost" className="text-primary pr-0">
+            Ver todos
+            <ChevronRight size={16} />
+          </Button>
+        </div>
+        <div className="px-5 h-screen">
+          <RestaurantList />
         </div>
       </main>
     </>
