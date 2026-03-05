@@ -6,6 +6,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center p-5">
       <Image
+        className="h-auto w-auto"
         src="/logo.png"
         alt="Logo"
         width={100}

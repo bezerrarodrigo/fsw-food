@@ -6,6 +6,7 @@ import ProductList from "./components/products-list";
 import Search from "./components/search";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
+import PromoBanner from "./components/promo-banner";
 
 export default async function Home() {
   const products = await prisma.product.findMany({
@@ -35,13 +36,9 @@ export default async function Home() {
           <CategoryList />
         </div>
         <div className="px-5">
-          <Image
-            className="w-full h-auto object-contain"
+          <PromoBanner
             src="/banner-promo01.png"
             alt="Até 30% de desconto em pizzas"
-            width={0}
-            height={0}
-            sizes="100vw"
           />
         </div>
         <div className="flex items-center justify-between px-5 mb-2">
@@ -52,6 +49,12 @@ export default async function Home() {
           </Button>
         </div>
         <ProductList products={products} />
+        <div className="px-5">
+          <PromoBanner
+            src="/banner-promo02.png"
+            alt="Valores promocionais em hamburgers"
+          />
+        </div>
       </main>
     </>
   );

@@ -28,7 +28,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           sizes="(min-width: 37.5rem) 37.5rem, 100vw"
         />
         {product.discountPercentage && (
-          <Badge className="absolute top-2 left-1 font-bold">
+          <Badge className="absolute top-2 left-1">
             <ArrowDown size={16} />
             <span className="text-xs font-bold">
               {product.discountPercentage}%
