@@ -62,7 +62,7 @@ export default async function Home() {
             <ChevronRight size={16} />
           </Button>
         </div>
-        <div className="px-5 h-screen">
+        <div className="px-5">
           <RestaurantList />
         </div>
       </main>
