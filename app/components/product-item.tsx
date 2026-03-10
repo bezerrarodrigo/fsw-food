@@ -4,6 +4,7 @@ import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { formatPrice } from "../helpers/price";
 import Link from "next/link";
+import DiscountBadge from "./discount-badge";
 
 interface ProductItemProps {
   product: Prisma.ProductGetPayload<{
@@ -29,14 +30,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
             fill
             sizes="(min-width: 37.5rem) 37.5rem, 100vw"
           />
-          {product.discountPercentage && (
-            <Badge className="absolute top-2 left-1">
-              <ArrowDown size={16} />
-              <span className="text-xs font-bold">
-                {product.discountPercentage}%
-              </span>
-            </Badge>
-          )}
+          <div className="absolute top-2 left-2">
+            {product.discountPercentage && <DiscountBadge product={product} />}
+          </div>
         </div>
         <div className="flex flex-col">
           <h3 className="text-sm truncate">{product.name}</h3>

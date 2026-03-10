@@ -7,6 +7,7 @@ export function formatPrice(product: Product): string {
       currency: "BRL",
     });
   }
+
   const discountedPrice =
     Number(product.price) -
     (Number(product.price) * product.discountPercentage) / 100;
