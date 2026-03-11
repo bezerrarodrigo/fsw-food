@@ -1,6 +1,11 @@
-import { Product } from "@/generated/prisma/client";
+type PriceValue = number | string | { toString(): string };
 
-export function formatPrice(product: Product): string {
+interface ProductWithPrice {
+  price: PriceValue;
+  discountPercentage: number;
+}
+
+export function formatPrice(product: ProductWithPrice): string {
   if (product.discountPercentage === 0) {
     return Number(product.price).toLocaleString("pt-BR", {
       style: "currency",

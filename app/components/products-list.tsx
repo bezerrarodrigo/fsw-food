@@ -1,6 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
 import ProductItem from "./product-item";
-import { Button } from "@/components/ui/button";
 
 interface ProductListProps {
   products: Prisma.ProductGetPayload<{

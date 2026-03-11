@@ -1,9 +1,7 @@
-import { Badge } from "@/components/ui/badge";
 import { Prisma } from "@/generated/prisma/client";
-import { ArrowDown } from "lucide-react";
 import Image from "next/image";
-import { formatPrice } from "../helpers/price";
 import Link from "next/link";
+import { formatPrice } from "../helpers/price";
 import DiscountBadge from "./discount-badge";
 
 interface ProductItemProps {
