@@ -33,7 +33,7 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
         },
       },
     },
-    take: 10,
+    take: 5,
   });
 
   if (!product) {

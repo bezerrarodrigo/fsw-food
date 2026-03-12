@@ -72,8 +72,8 @@ const ProductDetails = ({
         />
       </div>
 
-      <div className="p-5">
-        <div className="flex gap-2 items-center">
+      <div className="py-5">
+        <div className="flex gap-2 items-center px-5">
           <div className="h-6 w-6 relative">
             <Image
               src={product.restaurant.imageUrl}
@@ -87,11 +87,11 @@ const ProductDetails = ({
           </p>
         </div>
 
-        <div>
+        <div className="px-5">
           <h1 className="font-semibold text-xl mb-3 mt-1">{product.name}</h1>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-5">
           <div className="flex flex-col">
             <div className="flex gap-1 relative">
               <h2 className="text-xl font-semibold">{formatPrice(product)}</h2>
@@ -127,7 +127,7 @@ const ProductDetails = ({
           </div>
         </div>
 
-        <Card className="mt-6">
+        <Card className="mt-6 mx-5">
           <div className="flex justify-around">
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-1 text-muted-foreground">
@@ -158,13 +158,13 @@ const ProductDetails = ({
           </div>
         </Card>
 
-        <div className="mt-4">
+        <div className="mt-4 px-5">
           <h3 className="font-semibold">Sobre</h3>
           <p className="text-sm text-muted-foreground">{product.description}</p>
         </div>
 
         <div className="mt-4">
-          <h3 className="font-semibold">Sucos</h3>
+          <h3 className="font-semibold px-5">Sucos</h3>
           <ProductList products={complementaryProducts} />
         </div>
       </div>
