@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import ImageHeader from "./image-header";
+import ProductList from "@/app/components/products-list";
 
 interface ProductDetailsProduct {
   imageUrl: string;
@@ -28,11 +29,26 @@ interface ProductDetailsProduct {
   };
 }
 
-interface ProductDetailsProps {
-  product: ProductDetailsProduct;
+interface ComplementaryProduct {
+  id: string;
+  imageUrl: string;
+  name: string;
+  price: number;
+  discountPercentage: number;
+  restaurant: {
+    name: string;
+  };
 }
 
-const ProductDetails = ({ product }: ProductDetailsProps) => {
+interface ProductDetailsProps {
+  product: ProductDetailsProduct;
+  complementaryProducts: ComplementaryProduct[];
+}
+
+const ProductDetails = ({
+  product,
+  complementaryProducts,
+}: ProductDetailsProps) => {
   //state
   const [quantity, setQuantity] = useState(1);
 
@@ -145,6 +161,11 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <div className="mt-4">
           <h3 className="font-semibold">Sobre</h3>
           <p className="text-sm text-muted-foreground">{product.description}</p>
+        </div>
+
+        <div className="mt-4">
+          <h3 className="font-semibold">Sucos</h3>
+          <ProductList products={complementaryProducts} />
         </div>
       </div>
     </div>

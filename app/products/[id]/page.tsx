@@ -20,6 +20,22 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
     },
   });
 
+  const juices = await prisma.product.findMany({
+    where: {
+      category: {
+        name: "Sucos",
+      },
+    },
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    take: 10,
+  });
+
   if (!product) {
     return notFound();
   }
@@ -38,7 +54,23 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
     },
   };
 
-  return <ProductDetails product={serializedProduct} />;
+  const serializedJuices = juices.map((juice) => ({
+    id: juice.id,
+    imageUrl: juice.imageUrl,
+    name: juice.name,
+    price: Number(juice.price),
+    discountPercentage: juice.discountPercentage,
+    restaurant: {
+      name: juice.restaurant.name,
+    },
+  }));
+
+  return (
+    <ProductDetails
+      product={serializedProduct}
+      complementaryProducts={serializedJuices}
+    />
+  );
 };
 
 export default ProductInfo;

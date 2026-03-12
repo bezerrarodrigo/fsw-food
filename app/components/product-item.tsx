@@ -1,19 +1,21 @@
-import { Prisma } from "@/generated/prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "../helpers/price";
 import DiscountBadge from "./discount-badge";
 
+interface ProductItemProduct {
+  id: string;
+  imageUrl: string;
+  name: string;
+  price: number | string | { toString(): string };
+  discountPercentage: number;
+  restaurant: {
+    name: string;
+  };
+}
+
 interface ProductItemProps {
-  product: Prisma.ProductGetPayload<{
-    include: {
-      restaurant: {
-        select: {
-          name: true;
-        };
-      };
-    };
-  }>;
+  product: ProductItemProduct;
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {
