@@ -72,7 +72,7 @@ const ProductDetails = ({
         />
       </div>
 
-      <div className="py-5">
+      <div className="py-5 relative rounded-tl-3xl rounded-tr-3xl bg-white -mt-6 shadow-lg">
         <div className="flex gap-2 items-center px-5">
           <div className="h-6 w-6 relative">
             <Image
