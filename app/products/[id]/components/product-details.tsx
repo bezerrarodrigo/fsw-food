@@ -167,6 +167,12 @@ const ProductDetails = ({
           <h3 className="font-semibold px-5">Sucos</h3>
           <ProductList products={complementaryProducts} />
         </div>
+
+        <div className="px-5 mt-6">
+          <Button className="w-full h-12 font-semibold">
+            Adicionar a sacola
+          </Button>
+        </div>
       </div>
     </div>
   );
