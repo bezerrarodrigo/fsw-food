@@ -20,7 +20,12 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
     return notFound();
   }
 
-  return <RestaurantDetails restaurant={restaurant} />;
+  const restaurantWithNumberValues = {
+    ...restaurant,
+    deliveryFee: Number(restaurant.deliveryFee),
+  };
+
+  return <RestaurantDetails restaurant={restaurantWithNumberValues} />;
 };
 
 export default RestaurantPage;

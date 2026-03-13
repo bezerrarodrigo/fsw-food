@@ -21,7 +21,7 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
             fill
           />
           <Badge className="absolute top-2 left-1 bg-white">
-            <Star className="fill-yellow-500" size={16} />
+            <Star className="fill-yellow-500 text-yellow-500" size={16} />
             <span className="text-xs font-semibold text-black">5.0</span>
           </Badge>
           <Button className="absolute top-2 right-2 bg-gray-700 rounded-full h-7 w-7">
