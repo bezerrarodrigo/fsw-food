@@ -1,4 +1,4 @@
-import ProductList from "@/app/components/products-list";
+import InfoDeliveryCard from "@/app/components/infoDelivery-card";
 import ImageHeader from "@/app/products/[id]/components/image-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,6 @@ interface RestaurantDetailsProps {
 }
 
 const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
-  const restaurantProducts = await prisma.product.findMany({
-    where: {
-      restaurantId: restaurant.id,
-    },
-  });
-
   return (
     <div>
       <div className="w-full h-53.75 relative">
@@ -61,33 +55,11 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
             <span className=" font-semibold text-white">5.0</span>
           </Badge>
         </div>
-        <Card className="mt-6 mx-5">
-          <div className="flex justify-around">
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-xs">Entrega</span>
-                <BikeIcon size={14} />
-              </div>
-              {restaurant.deliveryFee == 0 ? (
-                <span className="font-medium">Grátis</span>
-              ) : (
-                <span className="font-medium">
-                  {Number(restaurant.deliveryFee).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </span>
-              )}
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-xs">Tempo</span>
-                <TimerIcon size={14} />
-              </div>
-              <span>{restaurant.deliveryTimeMinutes}min</span>
-            </div>
-          </div>
-        </Card>
+        <InfoDeliveryCard
+          deliveryFee={restaurant.deliveryFee}
+          deliveryTimeMinutes={restaurant.deliveryTimeMinutes}
+        />
+
         <div className="px-5 mt-6">
           <h2 className="font-semibold text-md">Mais Pedidos</h2>
         </div>

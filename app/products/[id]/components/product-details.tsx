@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ImageHeader from "./image-header";
 import ProductList from "@/app/components/products-list";
+import InfoDeliveryCard from "@/app/components/infoDelivery-card";
 
 interface ProductDetailsProduct {
   imageUrl: string;
@@ -127,36 +128,10 @@ const ProductDetails = ({
           </div>
         </div>
 
-        <Card className="mt-6 mx-5">
-          <div className="flex justify-around">
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-xs">Entrega</span>
-                <BikeIcon size={14} />
-              </div>
-              {product.restaurant.deliveryFee === 0 ? (
-                <span className="font-medium">Grátis</span>
-              ) : (
-                <span className="font-medium">
-                  {Number(product.restaurant.deliveryFee).toLocaleString(
-                    "pt-BR",
-                    {
-                      style: "currency",
-                      currency: "BRL",
-                    },
-                  )}
-                </span>
-              )}
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-xs">Tempo</span>
-                <TimerIcon size={14} />
-              </div>
-              <span>{product.restaurant.deliveryTime}min</span>
-            </div>
-          </div>
-        </Card>
+        <InfoDeliveryCard
+          deliveryFee={product.restaurant.deliveryFee}
+          deliveryTimeMinutes={product.restaurant.deliveryTime}
+        />
 
         <div className="mt-4 px-5">
           <h3 className="font-semibold">Sobre</h3>
