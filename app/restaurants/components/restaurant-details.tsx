@@ -1,18 +1,31 @@
 import InfoDeliveryCard from "@/app/components/infoDelivery-card";
+import ProductList from "@/app/components/products-list";
 import ImageHeader from "@/app/products/[id]/components/image-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { prisma } from "@/lib/prisma";
-import { BikeIcon, Heart, StarIcon, TimerIcon } from "lucide-react";
+import { Heart, StarIcon } from "lucide-react";
 import Image from "next/image";
 
 interface Restaurant {
   id: string;
   name: string;
   imageUrl: string;
-  deliveryFee: number;
+  deliveryFee: number | string | { toString(): string };
   deliveryTimeMinutes: number;
+  categories: {
+    id: string;
+    name: string;
+  }[];
+  products: {
+    id: string;
+    name: string;
+    imageUrl: string;
+    price: number | string | { toString(): string };
+    discountPercentage: number;
+    restaurant: {
+      name: string;
+    };
+  }[];
 }
 
 interface RestaurantDetailsProps {
@@ -60,8 +73,22 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
           deliveryTimeMinutes={restaurant.deliveryTimeMinutes}
         />
 
-        <div className="px-5 mt-6">
-          <h2 className="font-semibold text-md">Mais Pedidos</h2>
+        <div className="overflow-x-scroll mt-6 flex gap-4 px-5 [&&::-webkit-scrollbar]:hidden">
+          {restaurant.categories.map((category) => (
+            <Badge
+              variant="secondary"
+              key={category.id}
+              className="mr-2 mb-2 min-w-44"
+            >
+              {category.name}
+            </Badge>
+          ))}
+        </div>
+
+        <div className="mt-4 space-y-3">
+          {/* TODO: produtos mais pedidos */}
+          <h2 className="font-semibold text-md px-5">Mais Pedidos</h2>
+          <ProductList products={restaurant.products} />
         </div>
       </div>
     </div>

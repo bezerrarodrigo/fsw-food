@@ -15,17 +15,25 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
     where: {
       id,
     },
+    include: {
+      categories: true,
+      products: {
+        take: 10,
+        include: {
+          restaurant: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
   if (!restaurant) {
     return notFound();
   }
 
-  const restaurantWithNumberValues = {
-    ...restaurant,
-    deliveryFee: Number(restaurant.deliveryFee),
-  };
-
-  return <RestaurantDetails restaurant={restaurantWithNumberValues} />;
+  return <RestaurantDetails restaurant={restaurant} />;
 };
 
 export default RestaurantPage;

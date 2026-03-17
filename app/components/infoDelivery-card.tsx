@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { BikeIcon, TimerIcon } from "lucide-react";
 
 interface infoDeliveryCardProps {
-  deliveryFee: number;
+  deliveryFee: number | string | { toString(): string };
   deliveryTimeMinutes: number;
 }
 
