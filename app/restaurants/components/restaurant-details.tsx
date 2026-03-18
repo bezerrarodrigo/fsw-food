@@ -6,6 +6,17 @@ import { Button } from "@/components/ui/button";
 import { Heart, StarIcon } from "lucide-react";
 import Image from "next/image";
 
+interface Product {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: number | string | { toString(): string };
+  discountPercentage: number;
+  restaurant: {
+    name: string;
+  };
+}
+
 interface Restaurant {
   id: string;
   name: string;
@@ -15,17 +26,9 @@ interface Restaurant {
   categories: {
     id: string;
     name: string;
+    products: Product[];
   }[];
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: number | string | { toString(): string };
-    discountPercentage: number;
-    restaurant: {
-      name: string;
-    };
-  }[];
+  products: Product[];
 }
 
 interface RestaurantDetailsProps {
@@ -50,7 +53,7 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
         </Button>
       </div>
 
-      <div className="py-5 relative rounded-tl-3xl rounded-tr-3xl bg-white -mt-6 shadow-lg h-screen">
+      <div className="py-5 relative rounded-tl-3xl rounded-tr-3xl bg-white -mt-6 shadow-lg ">
         <div className="flex items-center justify-between px-5">
           <div className="flex gap-2 items-center">
             <div className="h-10 w-10 relative">
@@ -86,10 +89,18 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
         </div>
 
         <div className="mt-4 space-y-3">
-          {/* TODO: produtos mais pedidos */}
           <h2 className="font-semibold text-md px-5">Mais Pedidos</h2>
           <ProductList products={restaurant.products} />
         </div>
+
+        {restaurant.categories.map((category) => (
+          <div key={category.id} className="mt-4 space-y-3">
+            <div className="mt-4 space-y-3">
+              <h2 className="font-semibold text-md px-5">{category.name}</h2>
+              <ProductList products={category.products} />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -16,7 +16,19 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
       id,
     },
     include: {
-      categories: true,
+      categories: {
+        include: {
+          products: {
+            include: {
+              restaurant: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
       products: {
         take: 10,
         include: {
@@ -29,6 +41,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
       },
     },
   });
+
   if (!restaurant) {
     return notFound();
   }

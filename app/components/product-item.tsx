@@ -31,7 +31,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
             sizes="(min-width: 37.5rem) 37.5rem, 100vw"
           />
           <div className="absolute top-2 left-2">
-            {product.discountPercentage && <DiscountBadge product={product} />}
+            {product.discountPercentage > 0 && (
+              <DiscountBadge product={product} />
+            )}
           </div>
         </div>
         <div className="flex flex-col">
