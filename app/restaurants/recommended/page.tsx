@@ -8,7 +8,7 @@ const RecommendedRestaurants = async () => {
   return (
     <>
       <Header />
-      <div className="px-5 py-4">
+      <div className="px-5 space-y-4">
         <h2 className="font-semibold">Restaurantes Recomendados</h2>
         <div>
           {restaurants.map((restaurant) => {

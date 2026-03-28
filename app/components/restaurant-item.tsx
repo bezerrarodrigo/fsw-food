@@ -12,8 +12,8 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
   return (
     <Link href={`/restaurants/${restaurant.id}`}>
-      <div className="min-w-66.5 space-y-3 mt-4">
-        <div className="h-34 min-w-66.5 w-full relative">
+      <div className="space-y-3 mt-4">
+        <div className="h-34 min-w-66.5 relative">
           <Image
             className="object-cover rounded-lg shadow-md"
             src={restaurant.imageUrl}
