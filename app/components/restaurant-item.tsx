@@ -1,19 +1,21 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/generated/prisma/client";
+import { cn } from "@/lib/utils";
 import { BikeIcon, Heart, Star, TimerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 interface RestaurantItemProps {
   restaurant: Restaurant;
+  className?: string;
 }
 
-const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
+const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
   return (
     <Link href={`/restaurants/${restaurant.id}`}>
       <div className="space-y-3 mt-4">
-        <div className="h-37.5 min-w-37.5 w-full relative aspect-square">
+        <div className={cn("h-37.5 relative aspect-square", className)}>
           <Image
             className="object-cover rounded-lg shadow-md"
             src={restaurant.imageUrl}
