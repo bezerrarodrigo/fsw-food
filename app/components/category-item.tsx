@@ -9,7 +9,7 @@ interface CategoryItemProps {
 
 const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
-    <Link href={`/categories/${category.id}`}>
+    <Link href={`/categories/${category.id}/products`}>
       <Badge className="shadow-sm bg-white min-w-35" variant="ghost">
         <Image
           className="w-9 h-9"
