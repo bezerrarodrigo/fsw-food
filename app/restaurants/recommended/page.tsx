@@ -10,7 +10,7 @@ const RecommendedRestaurants = async () => {
       <Header />
       <div className="px-5 space-y-4">
         <h2 className="font-semibold">Restaurantes Recomendados</h2>
-        <div>
+        <div className="grid grid-cols-2 justify-items-center">
           {restaurants.map((restaurant) => {
             return (
               <RestaurantItem key={restaurant.id} restaurant={restaurant} />

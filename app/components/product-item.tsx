@@ -21,7 +21,7 @@ interface ProductItemProps {
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <Link className="w-37.5" href={`/products/${product.id}`}>
-      <div className="space-y-1">
+      <div className="space-y-3 mt-4">
         <div className="h-37.5 min-w-37.5 w-full relative aspect-square">
           <Image
             className="object-cover rounded-lg shadow-md"
