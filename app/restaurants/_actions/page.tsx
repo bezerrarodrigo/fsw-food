@@ -12,5 +12,8 @@ export const searchForRestaurants = async (search: string) => {
     },
   });
 
-  return restaurants;
+  return restaurants.map((restaurant) => ({
+    ...restaurant,
+    deliveryFee: Number(restaurant.deliveryFee),
+  }));
 };

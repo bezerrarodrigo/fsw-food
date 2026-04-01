@@ -6,8 +6,12 @@ import { BikeIcon, Heart, Star, TimerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+type RestaurantItemData = Omit<Restaurant, "deliveryFee"> & {
+  deliveryFee: number | Restaurant["deliveryFee"];
+};
+
 interface RestaurantItemProps {
-  restaurant: Restaurant;
+  restaurant: RestaurantItemData;
   className?: string;
 }
 

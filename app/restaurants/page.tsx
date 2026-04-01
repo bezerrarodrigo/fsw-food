@@ -1,18 +1,21 @@
 "use client";
 
-import { Restaurant } from "@/generated/prisma/browser";
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Header from "../components/header";
 import RestaurantItem from "../components/restaurant-item";
 import { searchForRestaurants } from "./_actions/page";
 
+type SearchedRestaurant = Awaited<
+  ReturnType<typeof searchForRestaurants>
+>[number];
+
 const Restaurants = () => {
   const searchParams = useSearchParams();
   const searchFor = searchParams.get("search");
 
   //states
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [restaurants, setRestaurants] = useState<SearchedRestaurant[]>([]);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
