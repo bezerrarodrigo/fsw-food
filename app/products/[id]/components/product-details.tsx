@@ -145,7 +145,7 @@ const ProductDetails = ({
 
         <div className="px-5 mt-6">
           <Button className="w-full h-12 font-semibold">
-            Adicionar a sacola
+            Adicionar ao carrinho
           </Button>
         </div>
       </div>
