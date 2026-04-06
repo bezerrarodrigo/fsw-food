@@ -3,13 +3,15 @@
 import { Product } from "@/generated/prisma/client";
 import { createContext, useState } from "react";
 
-interface CartProduct extends Product {
+export type SerializedProduct = Omit<Product, "price"> & { price: number };
+
+interface CartProduct extends SerializedProduct {
   quantity: number;
 }
 
 interface CartContextProps {
   products: CartProduct[];
-  addProductToCart: (product: Product) => void;
+  addProductToCart: (product: SerializedProduct) => void;
 }
 
 export const CartContext = createContext<CartContextProps>({
@@ -22,7 +24,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
 
   //functions
-  const addProductToCart = (product: Product) => {
+  const addProductToCart = (product: SerializedProduct) => {
     setProducts((prev) => [...prev, { ...product, quantity: 0 }]);
   };
 

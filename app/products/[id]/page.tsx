@@ -44,11 +44,15 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
   }
 
   const serializedProduct = {
-    imageUrl: product.imageUrl,
+    id: product.id,
     name: product.name,
+    description: product.description,
+    imageUrl: product.imageUrl,
     price: Number(product.price),
     discountPercentage: product.discountPercentage,
-    description: product.description,
+    restaurantId: product.restaurantId,
+    categoryId: product.categoryId,
+    createdAt: product.createdAt,
     restaurant: {
       imageUrl: product.restaurant.imageUrl,
       name: product.restaurant.name,
