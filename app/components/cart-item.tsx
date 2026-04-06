@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon, Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import { CartContext, CartProduct } from "../contexts/cart";
-import { formatPrice } from "../helpers/price";
 import { useContext } from "react";
 
 interface CartItemProps {
@@ -32,14 +31,23 @@ const CartItem = ({ cartProduct: product }: CartItemProps) => {
         <h3 className="text-xs font-semibold">{product.name}</h3>
         <div className="flex items-center gap-1">
           <div className="flex">
-            <h2 className="font-semibold text-xs">{formatPrice(product)}</h2>
+            <h2 className="font-semibold text-xs">
+              {(
+                Number(product.price) *
+                (1 - product.discountPercentage / 100) *
+                product.quantity
+              ).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+            </h2>
           </div>
           {product.discountPercentage > 0 && (
             <span className="font-light line-through  text-muted-foreground text-xs">
-              {Number(product.price).toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              {(Number(product.price) * product.quantity).toLocaleString(
+                "pt-BR",
+                {
+                  style: "currency",
+                  currency: "BRL",
+                },
+              )}
             </span>
           )}
         </div>
