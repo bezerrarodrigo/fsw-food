@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../contexts/cart";
+import CartItem from "./cart-item";
 
 const Cart = () => {
   //contexts
@@ -8,7 +9,7 @@ const Cart = () => {
   return (
     <div>
       {products.map((product) => (
-        <div key={product.id}>{product.name}</div>
+        <CartItem key={product.id} cartProduct={product} />
       ))}
     </div>
   );

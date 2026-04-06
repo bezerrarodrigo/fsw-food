@@ -1,24 +1,23 @@
 "use client";
 
+import Cart from "@/app/components/cart";
 import DiscountBadge from "@/app/components/discount-badge";
 import InfoDeliveryCard from "@/app/components/infoDelivery-card";
 import ProductList from "@/app/components/products-list";
+import { CartContext, SerializedProduct } from "@/app/contexts/cart";
 import { formatPrice } from "@/app/helpers/price";
 import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import Image from "next/image";
-import { useContext, useState } from "react";
-import ImageHeader from "./image-header";
-import { CartContext, SerializedProduct } from "@/app/contexts/cart";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
-import Cart from "@/app/components/cart";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import Image from "next/image";
+import { useContext, useState } from "react";
+import ImageHeader from "./image-header";
 
 interface ComplementaryProduct {
   id: string;
@@ -48,7 +47,7 @@ const ProductDetails = ({
   complementaryProducts,
 }: ProductDetailsProps) => {
   //contexts
-  const { addProductToCart, products } = useContext(CartContext);
+  const { addProductToCart } = useContext(CartContext);
 
   //state
   const [quantity, setQuantity] = useState(1);
@@ -64,11 +63,9 @@ const ProductDetails = ({
   }
 
   function handleToCartClick() {
-    addProductToCart(product);
+    addProductToCart(product, quantity);
     setIsCartOpen(true);
   }
-
-  console.log(products);
 
   return (
     <>
