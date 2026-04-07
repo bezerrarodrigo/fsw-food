@@ -1,17 +1,25 @@
 "use client";
 
 import { Product } from "@/generated/prisma/client";
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 
 export type SerializedProduct = Omit<Product, "price"> & { price: number };
 
 export interface CartProduct extends SerializedProduct {
   quantity: number;
+  restaurant: { deliveryFee: number };
 }
 
 interface CartContextProps {
+  subtotalPrice: number;
+  totalPrice: number;
+  totalDiscount: number;
+  deliveryFee: number;
   products: CartProduct[];
-  addProductToCart: (product: SerializedProduct, quantity: number) => void;
+  addProductToCart: (
+    product: SerializedProduct & { restaurant: { deliveryFee: number } },
+    quantity: number,
+  ) => void;
   increaseProductQuantity: (productId: string) => void;
   decreaseProductQuantity: (productId: string) => void;
   deleteProductFromCart: (productId: string) => void;
@@ -19,6 +27,10 @@ interface CartContextProps {
 
 export const CartContext = createContext<CartContextProps>({
   products: [],
+  subtotalPrice: 0,
+  totalPrice: 0,
+  totalDiscount: 0,
+  deliveryFee: 0,
   addProductToCart: () => {},
   increaseProductQuantity: () => {},
   decreaseProductQuantity: () => {},
@@ -29,8 +41,34 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   //states
   const [products, setProducts] = useState<CartProduct[]>([]);
 
+  //variables
+  const subtotalPrice = useMemo(() => {
+    return products.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+    }, 0);
+  }, [products]);
+
+  const totalPrice = useMemo(() => {
+    return products.reduce((acc, product) => {
+      const discount = product.discountPercentage
+        ? (product.price * product.discountPercentage) / 100
+        : 0;
+      return acc + (product.price - discount) * product.quantity;
+    }, 0);
+  }, [products]);
+
+  const totalDiscount = subtotalPrice - totalPrice;
+
+  const deliveryFee = useMemo(() => {
+    if (products.length === 0) return 0;
+    return products[0].restaurant.deliveryFee;
+  }, [products]);
+
   //functions
-  const addProductToCart = (product: SerializedProduct, quantity: number) => {
+  const addProductToCart = (
+    product: SerializedProduct & { restaurant: { deliveryFee: number } },
+    quantity: number,
+  ) => {
     if (products.some((p) => p.id === product.id)) {
       setProducts((prev) =>
         prev.map((p) =>
@@ -72,6 +110,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         increaseProductQuantity,
         decreaseProductQuantity,
         deleteProductFromCart,
+        subtotalPrice,
+        totalPrice,
+        totalDiscount,
+        deliveryFee,
       }}
     >
       {children}
