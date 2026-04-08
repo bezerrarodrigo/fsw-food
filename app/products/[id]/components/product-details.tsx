@@ -8,6 +8,14 @@ import { CartContext, SerializedProduct } from "@/app/contexts/cart";
 import { formatPrice } from "@/app/helpers/price";
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -47,11 +55,16 @@ const ProductDetails = ({
   complementaryProducts,
 }: ProductDetailsProps) => {
   //contexts
-  const { addProductToCart } = useContext(CartContext);
+  const {
+    addProductToCart,
+    products: cartProducts,
+    clearCart,
+  } = useContext(CartContext);
 
   //state
   const [quantity, setQuantity] = useState(1);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   //handlers
   function handleIncreaseQuantity() {
@@ -63,7 +76,23 @@ const ProductDetails = ({
   }
 
   function handleToCartClick() {
+    const hasDifferentRestaurant =
+      cartProducts.length > 0 &&
+      cartProducts.some((p) => p.restaurantId !== product.restaurant.name);
+
+    if (hasDifferentRestaurant) {
+      setIsConfirmDialogOpen(true);
+      return;
+    }
+
     addProductToCart(product, quantity);
+    setIsCartOpen(true);
+  }
+
+  function handleClearAndAdd() {
+    clearCart();
+    addProductToCart(product, quantity);
+    setIsConfirmDialogOpen(false);
     setIsCartOpen(true);
   }
 
@@ -173,6 +202,30 @@ const ProductDetails = ({
           <Cart />
         </SheetContent>
       </Sheet>
+
+      <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Produto de outro restaurante</DialogTitle>
+            <DialogDescription>
+              Você possui itens de outro restaurante no carrinho. Deseja limpar
+              o carrinho e adicionar este produto, ou manter os itens atuais?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex-col gap-2 sm:flex-row">
+            <Button
+              variant="outline"
+              onClick={() => setIsConfirmDialogOpen(false)}
+              className="w-full"
+            >
+              Manter carrinho
+            </Button>
+            <Button onClick={handleClearAndAdd} className="w-full">
+              Limpar e adicionar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
