@@ -78,7 +78,7 @@ const ProductDetails = ({
   function handleToCartClick() {
     const hasDifferentRestaurant =
       cartProducts.length > 0 &&
-      cartProducts.some((p) => p.restaurantId !== product.restaurant.name);
+      cartProducts.some((p) => p.restaurantId !== product.restaurantId);
 
     if (hasDifferentRestaurant) {
       setIsConfirmDialogOpen(true);
