@@ -81,3 +81,8 @@ export type User = Prisma.UserModel;
  *
  */
 export type VerificationToken = Prisma.VerificationTokenModel;
+/**
+ * Model Order
+ *
+ */
+export type Order = Prisma.OrderModel;

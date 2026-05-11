@@ -1,8 +1,8 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { useContext } from "react";
 import { CartContext } from "../contexts/cart";
 import CartItem from "./cart-item";
-import { Button } from "@/components/ui/button";
 
 const Cart = () => {
   //contexts
@@ -10,13 +10,13 @@ const Cart = () => {
     useContext(CartContext);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <div className="flex flex-col justify-between">
       <div>
         {products.map((product) => (
           <CartItem key={product.id} cartProduct={product} />
         ))}
       </div>
-      <div className="p-5 ">
+      <div className="p-5 mt-auto">
         <Card>
           <CardContent>
             <div className="flex justify-between items-center border-b pb-2">

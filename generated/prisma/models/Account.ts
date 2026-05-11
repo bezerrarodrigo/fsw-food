@@ -586,10 +586,6 @@ export type AccountOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder;
 };
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null;
-};
-
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null;
   increment?: number;

@@ -419,6 +419,7 @@ export const ModelName = {
   Session: "Session",
   User: "User",
   VerificationToken: "VerificationToken",
+  Order: "Order",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -447,7 +448,8 @@ export type TypeMap<
       | "account"
       | "session"
       | "user"
-      | "verificationToken";
+      | "verificationToken"
+      | "order";
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -983,6 +985,82 @@ export type TypeMap<
         };
       };
     };
+    Order: {
+      payload: Prisma.$OrderPayload<ExtArgs>;
+      fields: Prisma.OrderFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OrderFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OrderFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        findFirst: {
+          args: Prisma.OrderFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OrderFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        findMany: {
+          args: Prisma.OrderFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>[];
+        };
+        create: {
+          args: Prisma.OrderCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        createMany: {
+          args: Prisma.OrderCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OrderCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>[];
+        };
+        delete: {
+          args: Prisma.OrderDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        update: {
+          args: Prisma.OrderUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OrderDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OrderUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OrderUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>[];
+        };
+        upsert: {
+          args: Prisma.OrderUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderPayload>;
+        };
+        aggregate: {
+          args: Prisma.OrderAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrder>;
+        };
+        groupBy: {
+          args: Prisma.OrderGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OrderGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OrderCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OrderCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -1053,6 +1131,7 @@ export const ProductScalarFieldEnum = {
   restaurantId: "restaurantId",
   categoryId: "categoryId",
   createdAt: "createdAt",
+  orderId: "orderId",
 } as const;
 
 export type ProductScalarFieldEnum =
@@ -1105,6 +1184,22 @@ export const VerificationTokenScalarFieldEnum = {
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum];
+
+export const OrderScalarFieldEnum = {
+  id: "id",
+  userId: "userId",
+  restaurantId: "restaurantId",
+  deliveryFee: "deliveryFee",
+  deliveryTime: "deliveryTime",
+  subtotalPrice: "subtotalPrice",
+  totalPrice: "totalPrice",
+  totalDiscounts: "totalDiscounts",
+  createdAt: "createdAt",
+  status: "status",
+} as const;
+
+export type OrderScalarFieldEnum =
+  (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",
@@ -1193,6 +1288,22 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   "DateTime[]"
+>;
+
+/**
+ * Reference to a field of type 'OrderStatus'
+ */
+export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  "OrderStatus"
+>;
+
+/**
+ * Reference to a field of type 'OrderStatus[]'
+ */
+export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  "OrderStatus[]"
 >;
 
 /**
@@ -1336,6 +1447,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit;
   user?: Prisma.UserOmit;
   verificationToken?: Prisma.VerificationTokenOmit;
+  order?: Prisma.OrderOmit;
 };
 
 /* Types for Logging */

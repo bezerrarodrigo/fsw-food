@@ -11,13 +11,31 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { MenuIcon } from "lucide-react";
+import {
+  HeartIcon,
+  HomeIcon,
+  LogIn,
+  LogOut,
+  MenuIcon,
+  ScrollTextIcon,
+  ShoppingBagIcon,
+  User2Icon,
+} from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Header = () => {
   const { data, status } = useSession();
+
+  //functions
+  function handleSignIn() {
+    signIn();
+  }
+
+  function handleSignOut() {
+    signOut();
+  }
 
   return (
     <div className="flex justify-between items-center p-5">
@@ -50,7 +68,7 @@ const Header = () => {
                     alt={data?.user?.name || "User Avatar"}
                   />
                   <AvatarFallback>
-                    {data?.user?.name?.[0] || "U"}
+                    {data?.user?.name?.[0] || <User2Icon size={16} />}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
@@ -65,14 +83,49 @@ const Header = () => {
             )}
           </div>
 
+          <Separator className="my-4" />
+
+          {status === "authenticated" && (
+            <div className="px-2 space-y-2">
+              <Button
+                variant="ghost"
+                className="space-x-3 w-full justify-start rounded-full"
+              >
+                <HomeIcon size={16} />
+                <span className="block text-sm font-normal">Início</span>
+              </Button>
+              <Button
+                variant="ghost"
+                className="space-x-3 w-full justify-start rounded-full"
+              >
+                <ScrollTextIcon size={16} />
+                <span className="block text-sm font-normal">Meus pedidos</span>
+              </Button>
+              <Button
+                variant="ghost"
+                className="space-x-3 w-full justify-start rounded-full"
+              >
+                <HeartIcon size={16} />
+                <span className="block text-sm font-normal">
+                  Restaurantes favoritos
+                </span>
+              </Button>
+              <div>
+                <Separator className="my-4" />
+              </div>
+            </div>
+          )}
+
           <SheetFooter>
             {status === "authenticated" ? (
-              <Button onClick={() => signOut()} type="submit">
-                Sair
+              <Button onClick={handleSignOut} type="submit">
+                <span>Sair da conta</span>
+                <LogOut size={16} />
               </Button>
             ) : (
-              <Button onClick={() => signIn()} type="submit">
-                Entrar
+              <Button onClick={handleSignIn} type="submit">
+                <LogIn size={16} />
+                <span>Entrar com Google</span>
               </Button>
             )}
           </SheetFooter>

@@ -61,6 +61,7 @@ export const ModelName = {
   Session: "Session",
   User: "User",
   VerificationToken: "VerificationToken",
+  Order: "Order",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -110,6 +111,7 @@ export const ProductScalarFieldEnum = {
   restaurantId: "restaurantId",
   categoryId: "categoryId",
   createdAt: "createdAt",
+  orderId: "orderId",
 } as const;
 
 export type ProductScalarFieldEnum =
@@ -162,6 +164,22 @@ export const VerificationTokenScalarFieldEnum = {
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum];
+
+export const OrderScalarFieldEnum = {
+  id: "id",
+  userId: "userId",
+  restaurantId: "restaurantId",
+  deliveryFee: "deliveryFee",
+  deliveryTime: "deliveryTime",
+  subtotalPrice: "subtotalPrice",
+  totalPrice: "totalPrice",
+  totalDiscounts: "totalDiscounts",
+  createdAt: "createdAt",
+  status: "status",
+} as const;
+
+export type OrderScalarFieldEnum =
+  (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",
