@@ -54,6 +54,7 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
     categoryId: product.categoryId,
     createdAt: product.createdAt,
     restaurant: {
+      id: product.restaurant.id,
       imageUrl: product.restaurant.imageUrl,
       name: product.restaurant.name,
       deliveryFee: Number(product.restaurant.deliveryFee),

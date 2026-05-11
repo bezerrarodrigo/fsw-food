@@ -7,7 +7,7 @@ export type SerializedProduct = Omit<Product, "price"> & { price: number };
 
 export interface CartProduct extends SerializedProduct {
   quantity: number;
-  restaurant: { deliveryFee: number };
+  restaurant: { deliveryFee: number; deliveryTime: number; id: string };
 }
 
 interface CartContextProps {
@@ -17,7 +17,9 @@ interface CartContextProps {
   deliveryFee: number;
   products: CartProduct[];
   addProductToCart: (
-    product: SerializedProduct & { restaurant: { deliveryFee: number } },
+    product: SerializedProduct & {
+      restaurant: { deliveryFee: number; deliveryTime: number; id: string };
+    },
     quantity: number,
   ) => void;
   increaseProductQuantity: (productId: string) => void;
@@ -68,7 +70,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   //functions
   const addProductToCart = (
-    product: SerializedProduct & { restaurant: { deliveryFee: number } },
+    product: SerializedProduct & {
+      restaurant: { deliveryFee: number; deliveryTime: number; id: string };
+    },
     quantity: number,
   ) => {
     if (products.some((p) => p.id === product.id)) {

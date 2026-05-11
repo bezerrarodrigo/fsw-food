@@ -3,11 +3,37 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useContext } from "react";
 import { CartContext } from "../contexts/cart";
 import CartItem from "./cart-item";
+import { createOrder } from "../actions/order";
+import { useSession } from "next-auth/react";
 
 const Cart = () => {
   //contexts
   const { products, subtotalPrice, totalPrice, totalDiscount, deliveryFee } =
     useContext(CartContext);
+
+  const { data } = useSession();
+
+  //functions
+  async function handleFinishOrderClick() {
+    if (!data?.user) return;
+
+    const restaurant = products[0]?.restaurant;
+
+    await createOrder({
+      subtotalPrice,
+      totalPrice,
+      totalDiscounts: totalDiscount,
+      deliveryFee: restaurant.deliveryFee,
+      deliveryTime: restaurant.deliveryTime,
+      restaurant: {
+        connect: { id: restaurant.id },
+      },
+      status: "CONFIRMED",
+      user: {
+        connect: { id: data.user.id },
+      },
+    });
+  }
 
   return (
     <div className="flex flex-col justify-between">
@@ -64,7 +90,9 @@ const Cart = () => {
             </div>
           </CardContent>
           <div className="px-4">
-            <Button className="w-full">Finalizar pedido</Button>
+            <Button className="w-full" onClick={handleFinishOrderClick}>
+              Finalizar pedido
+            </Button>
           </div>
         </Card>
       </div>
