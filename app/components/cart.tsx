@@ -1,11 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { useContext, useState } from "react";
-import { CartContext } from "../contexts/cart";
-import CartItem from "./cart-item";
-import { createOrder } from "../actions/order";
-import { useSession } from "next-auth/react";
-import { Loader2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,8 +7,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useContext, useState } from "react";
+import { createOrder } from "../actions/order";
+import { CartContext } from "../contexts/cart";
+import CartItem from "./cart-item";
 
 const Cart = () => {
   //state

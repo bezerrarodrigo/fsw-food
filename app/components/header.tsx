@@ -18,10 +18,10 @@ import {
   LogOut,
   MenuIcon,
   ScrollTextIcon,
-  ShoppingBagIcon,
   User2Icon,
 } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { navigate } from "next/dist/client/components/segment-cache/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -95,11 +95,16 @@ const Header = () => {
                 <span className="block text-sm font-normal">Início</span>
               </Button>
               <Button
+                asChild
                 variant="ghost"
                 className="space-x-3 w-full justify-start rounded-full"
               >
-                <ScrollTextIcon size={16} />
-                <span className="block text-sm font-normal">Meus pedidos</span>
+                <Link href="/my-orders" className="flex items-center space-x-3">
+                  <ScrollTextIcon size={16} />
+                  <span className="block text-sm font-normal">
+                    Meus pedidos
+                  </span>
+                </Link>
               </Button>
               <Button
                 variant="ghost"
