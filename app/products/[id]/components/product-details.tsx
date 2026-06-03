@@ -196,7 +196,7 @@ const ProductDetails = ({
       <Sheet open={isCartOpen} onOpenChange={() => setIsCartOpen(false)}>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Meu carrinhos</SheetTitle>
+            <SheetTitle>Meu carrinho</SheetTitle>
             <SheetDescription>Itens adicionados ao carrinho.</SheetDescription>
           </SheetHeader>
           <Cart />
