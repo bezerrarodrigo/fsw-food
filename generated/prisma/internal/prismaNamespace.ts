@@ -93,12 +93,12 @@ export type PrismaVersion = {
 };
 
 /**
- * Prisma Client JS version: 7.7.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.7.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711",
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a",
 };
 
 /**
@@ -419,6 +419,7 @@ export const ModelName = {
   Session: "Session",
   User: "User",
   VerificationToken: "VerificationToken",
+  OrderProduct: "OrderProduct",
   Order: "Order",
 } as const;
 
@@ -449,6 +450,7 @@ export type TypeMap<
       | "session"
       | "user"
       | "verificationToken"
+      | "orderProduct"
       | "order";
     txIsolationLevel: TransactionIsolationLevel;
   };
@@ -985,6 +987,82 @@ export type TypeMap<
         };
       };
     };
+    OrderProduct: {
+      payload: Prisma.$OrderProductPayload<ExtArgs>;
+      fields: Prisma.OrderProductFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OrderProductFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OrderProductFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        findFirst: {
+          args: Prisma.OrderProductFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OrderProductFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        findMany: {
+          args: Prisma.OrderProductFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>[];
+        };
+        create: {
+          args: Prisma.OrderProductCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        createMany: {
+          args: Prisma.OrderProductCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OrderProductCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>[];
+        };
+        delete: {
+          args: Prisma.OrderProductDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        update: {
+          args: Prisma.OrderProductUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OrderProductDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OrderProductUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OrderProductUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>[];
+        };
+        upsert: {
+          args: Prisma.OrderProductUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderProductPayload>;
+        };
+        aggregate: {
+          args: Prisma.OrderProductAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderProduct>;
+        };
+        groupBy: {
+          args: Prisma.OrderProductGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OrderProductGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OrderProductCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OrderProductCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
     Order: {
       payload: Prisma.$OrderPayload<ExtArgs>;
       fields: Prisma.OrderFieldRefs;
@@ -1184,6 +1262,15 @@ export const VerificationTokenScalarFieldEnum = {
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum];
+
+export const OrderProductScalarFieldEnum = {
+  id: "id",
+  productId: "productId",
+  quantity: "quantity",
+} as const;
+
+export type OrderProductScalarFieldEnum =
+  (typeof OrderProductScalarFieldEnum)[keyof typeof OrderProductScalarFieldEnum];
 
 export const OrderScalarFieldEnum = {
   id: "id",
@@ -1423,6 +1510,21 @@ export type PrismaClientOptions = (
    * ```
    */
   comments?: runtime.SqlCommenterPlugin[];
+  /**
+   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
+   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
+   * performance for applications that execute a large number of unique queries, while a smaller
+   * cache size can reduce memory usage.
+   *
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   queryPlanCacheMaxSize: 100,
+   * })
+   * ```
+   */
+  queryPlanCacheMaxSize?: number;
 };
 export type GlobalOmitConfig = {
   restaurant?: Prisma.RestaurantOmit;
@@ -1432,6 +1534,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit;
   user?: Prisma.UserOmit;
   verificationToken?: Prisma.VerificationTokenOmit;
+  orderProduct?: Prisma.OrderProductOmit;
   order?: Prisma.OrderOmit;
 };
 

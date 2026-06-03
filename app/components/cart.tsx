@@ -39,6 +39,7 @@ const Cart = () => {
     if (!data?.user) return;
 
     const restaurant = products[0]?.restaurant;
+    if (!restaurant || products.length === 0) return;
 
     try {
       setIsSubmitting(true);
@@ -54,6 +55,14 @@ const Cart = () => {
         status: "CONFIRMED",
         user: {
           connect: { id: data.user.id },
+        },
+        orderProducts: {
+          createMany: {
+            data: products.map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
+          },
         },
       });
       clearCart();

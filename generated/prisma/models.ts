@@ -14,5 +14,6 @@ export type * from "./models/Account";
 export type * from "./models/Session";
 export type * from "./models/User";
 export type * from "./models/VerificationToken";
+export type * from "./models/OrderProduct";
 export type * from "./models/Order";
 export type * from "./commonInputTypes";

@@ -61,6 +61,7 @@ export const ModelName = {
   Session: "Session",
   User: "User",
   VerificationToken: "VerificationToken",
+  OrderProduct: "OrderProduct",
   Order: "Order",
 } as const;
 
@@ -164,6 +165,15 @@ export const VerificationTokenScalarFieldEnum = {
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum];
+
+export const OrderProductScalarFieldEnum = {
+  id: "id",
+  productId: "productId",
+  quantity: "quantity",
+} as const;
+
+export type OrderProductScalarFieldEnum =
+  (typeof OrderProductScalarFieldEnum)[keyof typeof OrderProductScalarFieldEnum];
 
 export const OrderScalarFieldEnum = {
   id: "id",

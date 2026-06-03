@@ -19,7 +19,11 @@ const MyOrders = async () => {
     },
     include: {
       restaurant: true,
-      products: true,
+      orderProducts: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
 

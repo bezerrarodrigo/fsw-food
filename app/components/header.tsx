@@ -87,13 +87,15 @@ const Header = () => {
 
           {status === "authenticated" && (
             <div className="px-2 space-y-2">
-              <Button
-                variant="ghost"
-                className="space-x-3 w-full justify-start rounded-full"
-              >
-                <HomeIcon size={16} />
-                <span className="block text-sm font-normal">Início</span>
-              </Button>
+              <Link href="/" className="flex items-center space-x-3">
+                <Button
+                  variant="ghost"
+                  className="space-x-3 w-full justify-start rounded-full"
+                >
+                  <HomeIcon size={16} />
+                  <span className="block text-sm font-normal">Início</span>
+                </Button>
+              </Link>
               <Button
                 asChild
                 variant="ghost"
