@@ -105,4 +105,4 @@ public/        # arquivos estáticos
 
 ## Autor
 
-Projeto desenvolvido por Felipe Bezerra como vitrine de estudo e evolução em desenvolvimento full stack.
+Projeto desenvolvido como vitrine de estudo e evolução em desenvolvimento full stack.
