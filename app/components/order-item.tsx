@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,21 +8,84 @@ import { Separator } from "@/components/ui/separator";
 import { OrderStatus, Prisma } from "@/generated/prisma/client";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "../contexts/cart";
+import { useRouter } from "next/navigation";
 
 interface OrderItemProps {
-  order: Prisma.OrderGetPayload<{
-    include: {
-      restaurant: true;
-      orderProducts: {
-        include: {
-          product: true;
+  order: Omit<
+    Prisma.OrderGetPayload<{
+      include: {
+        restaurant: true;
+        orderProducts: {
+          include: {
+            product: true;
+          };
         };
       };
-    };
-  }>;
+    }>,
+    | "deliveryFee"
+    | "subtotalPrice"
+    | "totalPrice"
+    | "totalDiscounts"
+    | "restaurant"
+    | "orderProducts"
+  > & {
+    deliveryFee: number;
+    subtotalPrice: number;
+    totalPrice: number;
+    totalDiscounts: number;
+    restaurant: Omit<
+      Prisma.OrderGetPayload<{
+        include: {
+          restaurant: true;
+          orderProducts: {
+            include: {
+              product: true;
+            };
+          };
+        };
+      }>["restaurant"],
+      "deliveryFee"
+    > & { deliveryFee: number };
+    orderProducts: Array<
+      Omit<
+        Prisma.OrderGetPayload<{
+          include: {
+            restaurant: true;
+            orderProducts: {
+              include: {
+                product: true;
+              };
+            };
+          };
+        }>["orderProducts"][number],
+        "product"
+      > & {
+        product: Omit<
+          Prisma.OrderGetPayload<{
+            include: {
+              restaurant: true;
+              orderProducts: {
+                include: {
+                  product: true;
+                };
+              };
+            };
+          }>["orderProducts"][number]["product"],
+          "price"
+        > & { price: number };
+      }
+    >;
+  };
 }
 
 const OrderItem = ({ order }: OrderItemProps) => {
+  //context
+  const { addProductToCart } = useContext(CartContext);
+
+  const router = useRouter();
+
   //functions
   function getOrderStatusLabel(order: OrderStatus) {
     switch (order) {
@@ -37,6 +102,24 @@ const OrderItem = ({ order }: OrderItemProps) => {
       default:
         return "";
     }
+  }
+
+  function handleRedoOrderClick() {
+    for (const orderProduct of order.orderProducts) {
+      addProductToCart(
+        {
+          ...orderProduct.product,
+          price: Number(orderProduct.product.price),
+          restaurant: {
+            id: order.restaurant.id,
+            deliveryFee: Number(order.restaurant.deliveryFee),
+            deliveryTime: order.restaurant.deliveryTimeMinutes,
+          },
+        },
+        orderProduct.quantity,
+      );
+    }
+    router.push("/cart");
   }
 
   return (
@@ -86,7 +169,12 @@ const OrderItem = ({ order }: OrderItemProps) => {
         <div className="flex items-center justify-between">
           <p className="text-sm">Total: R$ {order.totalPrice.toFixed(2)}</p>
           {order.status === "DELIVERED" && (
-            <Button className="text-primary text-xs" variant="ghost" size="sm">
+            <Button
+              className="text-primary text-xs"
+              variant="ghost"
+              size="sm"
+              onClick={handleRedoOrderClick}
+            >
               Refazer pedido
             </Button>
           )}

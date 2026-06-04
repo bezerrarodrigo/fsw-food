@@ -17,6 +17,7 @@ import {
   LogIn,
   LogOut,
   MenuIcon,
+  ShoppingCartIcon,
   ScrollTextIcon,
   User2Icon,
 } from "lucide-react";
@@ -96,6 +97,18 @@ const Header = () => {
                   <span className="block text-sm font-normal">Início</span>
                 </Button>
               </Link>
+              <Button
+                asChild
+                variant="ghost"
+                className="space-x-3 w-full justify-start rounded-full"
+              >
+                <Link href="/cart" className="flex items-center space-x-3">
+                  <ShoppingCartIcon size={16} />
+                  <span className="block text-sm font-normal">
+                    Meu carrinho
+                  </span>
+                </Link>
+              </Button>
               <Button
                 asChild
                 variant="ghost"

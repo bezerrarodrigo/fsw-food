@@ -27,13 +27,32 @@ const MyOrders = async () => {
     },
   });
 
+  const serializedOrders = orders.map((order) => ({
+    ...order,
+    deliveryFee: Number(order.deliveryFee),
+    subtotalPrice: Number(order.subtotalPrice),
+    totalPrice: Number(order.totalPrice),
+    totalDiscounts: Number(order.totalDiscounts),
+    orderProducts: order.orderProducts.map((orderProduct) => ({
+      ...orderProduct,
+      product: {
+        ...orderProduct.product,
+        price: Number(orderProduct.product.price),
+      },
+    })),
+    restaurant: {
+      ...order.restaurant,
+      deliveryFee: Number(order.restaurant.deliveryFee),
+    },
+  }));
+
   return (
     <>
       <Header />
       <div className="py-6 px-5">
         <h2 className="font-semibold">Meus pedidos</h2>
         <div className="mt-4">
-          {orders.map((order) => (
+          {serializedOrders.map((order) => (
             <OrderItem key={order.id} order={order} />
           ))}
         </div>
