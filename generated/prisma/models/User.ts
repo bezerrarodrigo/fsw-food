@@ -189,6 +189,7 @@ export type UserWhereInput = {
   accounts?: Prisma.AccountListRelationFilter;
   sessions?: Prisma.SessionListRelationFilter;
   orders?: Prisma.OrderListRelationFilter;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsListRelationFilter;
 };
 
 export type UserOrderByWithRelationInput = {
@@ -200,6 +201,7 @@ export type UserOrderByWithRelationInput = {
   accounts?: Prisma.AccountOrderByRelationAggregateInput;
   sessions?: Prisma.SessionOrderByRelationAggregateInput;
   orders?: Prisma.OrderOrderByRelationAggregateInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsOrderByRelationAggregateInput;
 };
 
 export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -219,6 +221,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     accounts?: Prisma.AccountListRelationFilter;
     sessions?: Prisma.SessionListRelationFilter;
     orders?: Prisma.OrderListRelationFilter;
+    usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsListRelationFilter;
   },
   "id" | "email"
 >;
@@ -262,6 +265,7 @@ export type UserCreateInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsCreateNestedManyWithoutUserInput;
 };
 
 export type UserUncheckedCreateInput = {
@@ -273,6 +277,7 @@ export type UserUncheckedCreateInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedCreateNestedManyWithoutUserInput;
 };
 
 export type UserUpdateInput = {
@@ -288,6 +293,7 @@ export type UserUpdateInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUpdateManyWithoutUserNestedInput;
 };
 
 export type UserUncheckedUpdateInput = {
@@ -303,6 +309,7 @@ export type UserUncheckedUpdateInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedUpdateManyWithoutUserNestedInput;
 };
 
 export type UserCreateManyInput = {
@@ -448,6 +455,33 @@ export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
   >;
 };
 
+export type UserCreateNestedOneWithoutUsersWhoFavoriteRestaurantsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUsersWhoFavoriteRestaurantsInput,
+    Prisma.UserUncheckedCreateWithoutUsersWhoFavoriteRestaurantsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUsersWhoFavoriteRestaurantsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutUsersWhoFavoriteRestaurantsNestedInput =
+  {
+    create?: Prisma.XOR<
+      Prisma.UserCreateWithoutUsersWhoFavoriteRestaurantsInput,
+      Prisma.UserUncheckedCreateWithoutUsersWhoFavoriteRestaurantsInput
+    >;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutUsersWhoFavoriteRestaurantsInput;
+    upsert?: Prisma.UserUpsertWithoutUsersWhoFavoriteRestaurantsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<
+      Prisma.XOR<
+        Prisma.UserUpdateToOneWithWhereWithoutUsersWhoFavoriteRestaurantsInput,
+        Prisma.UserUpdateWithoutUsersWhoFavoriteRestaurantsInput
+      >,
+      Prisma.UserUncheckedUpdateWithoutUsersWhoFavoriteRestaurantsInput
+    >;
+  };
+
 export type UserCreateWithoutAccountsInput = {
   id?: string;
   name?: string | null;
@@ -456,6 +490,7 @@ export type UserCreateWithoutAccountsInput = {
   image?: string | null;
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsCreateNestedManyWithoutUserInput;
 };
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -466,6 +501,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   image?: string | null;
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedCreateNestedManyWithoutUserInput;
 };
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -508,6 +544,7 @@ export type UserUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUpdateManyWithoutUserNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -522,6 +559,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedUpdateManyWithoutUserNestedInput;
 };
 
 export type UserCreateWithoutSessionsInput = {
@@ -532,6 +570,7 @@ export type UserCreateWithoutSessionsInput = {
   image?: string | null;
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsCreateNestedManyWithoutUserInput;
 };
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -542,6 +581,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   image?: string | null;
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedCreateNestedManyWithoutUserInput;
 };
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -584,6 +624,7 @@ export type UserUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUpdateManyWithoutUserNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -598,6 +639,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedUpdateManyWithoutUserNestedInput;
 };
 
 export type UserCreateWithoutOrdersInput = {
@@ -608,6 +650,7 @@ export type UserCreateWithoutOrdersInput = {
   image?: string | null;
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsCreateNestedManyWithoutUserInput;
 };
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -618,6 +661,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   image?: string | null;
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedCreateNestedManyWithoutUserInput;
 };
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -660,6 +704,7 @@ export type UserUpdateWithoutOrdersInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUpdateManyWithoutUserNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -674,6 +719,87 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
+  usersWhoFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsUncheckedUpdateManyWithoutUserNestedInput;
+};
+
+export type UserCreateWithoutUsersWhoFavoriteRestaurantsInput = {
+  id?: string;
+  name?: string | null;
+  email?: string | null;
+  emailVerified?: Date | string | null;
+  image?: string | null;
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+};
+
+export type UserUncheckedCreateWithoutUsersWhoFavoriteRestaurantsInput = {
+  id?: string;
+  name?: string | null;
+  email?: string | null;
+  emailVerified?: Date | string | null;
+  image?: string | null;
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+};
+
+export type UserCreateOrConnectWithoutUsersWhoFavoriteRestaurantsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUsersWhoFavoriteRestaurantsInput,
+    Prisma.UserUncheckedCreateWithoutUsersWhoFavoriteRestaurantsInput
+  >;
+};
+
+export type UserUpsertWithoutUsersWhoFavoriteRestaurantsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUsersWhoFavoriteRestaurantsInput,
+    Prisma.UserUncheckedUpdateWithoutUsersWhoFavoriteRestaurantsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUsersWhoFavoriteRestaurantsInput,
+    Prisma.UserUncheckedCreateWithoutUsersWhoFavoriteRestaurantsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUsersWhoFavoriteRestaurantsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUsersWhoFavoriteRestaurantsInput,
+    Prisma.UserUncheckedUpdateWithoutUsersWhoFavoriteRestaurantsInput
+  >;
+};
+
+export type UserUpdateWithoutUsersWhoFavoriteRestaurantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  emailVerified?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUsersWhoFavoriteRestaurantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  emailVerified?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
 };
 
 /**
@@ -684,6 +810,7 @@ export type UserCountOutputType = {
   accounts: number;
   sessions: number;
   orders: number;
+  usersWhoFavoriteRestaurants: number;
 };
 
 export type UserCountOutputTypeSelect<
@@ -693,6 +820,9 @@ export type UserCountOutputTypeSelect<
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs;
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs;
   orders?: boolean | UserCountOutputTypeCountOrdersArgs;
+  usersWhoFavoriteRestaurants?:
+    | boolean
+    | UserCountOutputTypeCountUsersWhoFavoriteRestaurantsArgs;
 };
 
 /**
@@ -738,6 +868,16 @@ export type UserCountOutputTypeCountOrdersArgs<
   where?: Prisma.OrderWhereInput;
 };
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUsersWhoFavoriteRestaurantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserFavoriteRestaurantsWhereInput;
+};
+
 export type UserSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
@@ -751,6 +891,9 @@ export type UserSelect<
     accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>;
     sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>;
     orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+    usersWhoFavoriteRestaurants?:
+      | boolean
+      | Prisma.User$usersWhoFavoriteRestaurantsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["user"]
@@ -806,6 +949,9 @@ export type UserInclude<
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>;
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>;
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+  usersWhoFavoriteRestaurants?:
+    | boolean
+    | Prisma.User$usersWhoFavoriteRestaurantsArgs<ExtArgs>;
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<
@@ -826,6 +972,7 @@ export type $UserPayload<
     accounts: Prisma.$AccountPayload<ExtArgs>[];
     sessions: Prisma.$SessionPayload<ExtArgs>[];
     orders: Prisma.$OrderPayload<ExtArgs>[];
+    usersWhoFavoriteRestaurants: Prisma.$UserFavoriteRestaurantsPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1417,6 +1564,22 @@ export interface Prisma__UserClient<
       >
     | Null
   >;
+  usersWhoFavoriteRestaurants<
+    T extends Prisma.User$usersWhoFavoriteRestaurantsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.User$usersWhoFavoriteRestaurantsArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserFavoriteRestaurantsPayload<ExtArgs>,
+        T,
+        "findMany",
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1994,6 +2157,37 @@ export type User$ordersArgs<
   take?: number;
   skip?: number;
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+
+/**
+ * User.usersWhoFavoriteRestaurants
+ */
+export type User$usersWhoFavoriteRestaurantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the UserFavoriteRestaurants
+   */
+  select?: Prisma.UserFavoriteRestaurantsSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the UserFavoriteRestaurants
+   */
+  omit?: Prisma.UserFavoriteRestaurantsOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserFavoriteRestaurantsInclude<ExtArgs> | null;
+  where?: Prisma.UserFavoriteRestaurantsWhereInput;
+  orderBy?:
+    | Prisma.UserFavoriteRestaurantsOrderByWithRelationInput
+    | Prisma.UserFavoriteRestaurantsOrderByWithRelationInput[];
+  cursor?: Prisma.UserFavoriteRestaurantsWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.UserFavoriteRestaurantsScalarFieldEnum
+    | Prisma.UserFavoriteRestaurantsScalarFieldEnum[];
 };
 
 /**

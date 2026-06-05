@@ -91,3 +91,8 @@ export type OrderProduct = Prisma.OrderProductModel;
  *
  */
 export type Order = Prisma.OrderModel;
+/**
+ * Model UserFavoriteRestaurants
+ *
+ */
+export type UserFavoriteRestaurants = Prisma.UserFavoriteRestaurantsModel;

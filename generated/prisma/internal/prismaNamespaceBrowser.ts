@@ -63,6 +63,7 @@ export const ModelName = {
   VerificationToken: "VerificationToken",
   OrderProduct: "OrderProduct",
   Order: "Order",
+  UserFavoriteRestaurants: "UserFavoriteRestaurants",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -190,6 +191,15 @@ export const OrderScalarFieldEnum = {
 
 export type OrderScalarFieldEnum =
   (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
+
+export const UserFavoriteRestaurantsScalarFieldEnum = {
+  id: "id",
+  userId: "userId",
+  restaurantId: "restaurantId",
+} as const;
+
+export type UserFavoriteRestaurantsScalarFieldEnum =
+  (typeof UserFavoriteRestaurantsScalarFieldEnum)[keyof typeof UserFavoriteRestaurantsScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",

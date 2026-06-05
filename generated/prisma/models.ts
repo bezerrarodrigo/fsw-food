@@ -16,4 +16,5 @@ export type * from "./models/User";
 export type * from "./models/VerificationToken";
 export type * from "./models/OrderProduct";
 export type * from "./models/Order";
+export type * from "./models/UserFavoriteRestaurants";
 export type * from "./commonInputTypes";

@@ -421,6 +421,7 @@ export const ModelName = {
   VerificationToken: "VerificationToken",
   OrderProduct: "OrderProduct",
   Order: "Order",
+  UserFavoriteRestaurants: "UserFavoriteRestaurants",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -451,7 +452,8 @@ export type TypeMap<
       | "user"
       | "verificationToken"
       | "orderProduct"
-      | "order";
+      | "order"
+      | "userFavoriteRestaurants";
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -1139,6 +1141,82 @@ export type TypeMap<
         };
       };
     };
+    UserFavoriteRestaurants: {
+      payload: Prisma.$UserFavoriteRestaurantsPayload<ExtArgs>;
+      fields: Prisma.UserFavoriteRestaurantsFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.UserFavoriteRestaurantsFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.UserFavoriteRestaurantsFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        findFirst: {
+          args: Prisma.UserFavoriteRestaurantsFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.UserFavoriteRestaurantsFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        findMany: {
+          args: Prisma.UserFavoriteRestaurantsFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>[];
+        };
+        create: {
+          args: Prisma.UserFavoriteRestaurantsCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        createMany: {
+          args: Prisma.UserFavoriteRestaurantsCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.UserFavoriteRestaurantsCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>[];
+        };
+        delete: {
+          args: Prisma.UserFavoriteRestaurantsDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        update: {
+          args: Prisma.UserFavoriteRestaurantsUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        deleteMany: {
+          args: Prisma.UserFavoriteRestaurantsDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.UserFavoriteRestaurantsUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.UserFavoriteRestaurantsUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>[];
+        };
+        upsert: {
+          args: Prisma.UserFavoriteRestaurantsUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserFavoriteRestaurantsPayload>;
+        };
+        aggregate: {
+          args: Prisma.UserFavoriteRestaurantsAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserFavoriteRestaurants>;
+        };
+        groupBy: {
+          args: Prisma.UserFavoriteRestaurantsGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.UserFavoriteRestaurantsGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.UserFavoriteRestaurantsCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.UserFavoriteRestaurantsCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -1287,6 +1365,15 @@ export const OrderScalarFieldEnum = {
 
 export type OrderScalarFieldEnum =
   (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
+
+export const UserFavoriteRestaurantsScalarFieldEnum = {
+  id: "id",
+  userId: "userId",
+  restaurantId: "restaurantId",
+} as const;
+
+export type UserFavoriteRestaurantsScalarFieldEnum =
+  (typeof UserFavoriteRestaurantsScalarFieldEnum)[keyof typeof UserFavoriteRestaurantsScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",
@@ -1536,6 +1623,7 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit;
   orderProduct?: Prisma.OrderProductOmit;
   order?: Prisma.OrderOmit;
+  userFavoriteRestaurants?: Prisma.UserFavoriteRestaurantsOmit;
 };
 
 /* Types for Logging */
