@@ -2,9 +2,9 @@ import InfoDeliveryCard from "@/app/components/infoDelivery-card";
 import ProductList from "@/app/components/products-list";
 import ImageHeader from "@/app/products/[id]/components/image-header";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Heart, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import Image from "next/image";
+import FavoriteRestaurantButton from "./favorite-restaurant-button";
 
 interface Product {
   id: string;
@@ -23,6 +23,7 @@ interface Restaurant {
   imageUrl: string;
   deliveryFee: number | string | { toString(): string };
   deliveryTimeMinutes: number;
+  isFavorited?: boolean;
   categories: {
     id: string;
     name: string;
@@ -35,7 +36,7 @@ interface RestaurantDetailsProps {
   restaurant: Restaurant;
 }
 
-const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
+const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
   return (
     <div>
       <div className="w-full h-53.75 relative">
@@ -45,12 +46,11 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
             name: restaurant.name,
           }}
         />
-        <Button
-          size="icon"
-          className="absolute top-4 right-4 bg-gray-700 rounded-full"
-        >
-          <Heart size={20} className="fill-white" />
-        </Button>
+        <FavoriteRestaurantButton
+          restaurantId={restaurant.id}
+          isFavorited={restaurant.isFavorited}
+          className="absolute top-4 right-4"
+        />
       </div>
 
       <div className="py-5 relative rounded-tl-3xl rounded-tr-3xl bg-white -mt-6 shadow-lg ">

@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/lib/auth";
 import RestaurantDetails from "../components/restaurant-details";
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 interface RestaurantPageProps {
   params: Promise<{
@@ -10,6 +12,7 @@ interface RestaurantPageProps {
 
 const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   const { id } = await params;
+  const session = await getServerSession(authOptions);
 
   const restaurant = await prisma.restaurant.findUnique({
     where: {
@@ -45,6 +48,14 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           },
         },
       },
+      favoriteRestaurants: {
+        where: {
+          userId: session?.user?.id,
+        },
+        select: {
+          id: true,
+        },
+      },
     },
   });
 
@@ -52,7 +63,16 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
     return notFound();
   }
 
-  return <RestaurantDetails restaurant={restaurant} />;
+  const { favoriteRestaurants, ...restaurantData } = restaurant;
+
+  return (
+    <RestaurantDetails
+      restaurant={{
+        ...restaurantData,
+        isFavorited: favoriteRestaurants.length > 0,
+      }}
+    />
+  );
 };
 
 export default RestaurantPage;

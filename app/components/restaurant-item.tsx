@@ -1,21 +1,58 @@
+"use client";
+
+import { toggleFavoriteRestaurant } from "@/app/actions/favorite-restaurant";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/generated/prisma/client";
 import { cn } from "@/lib/utils";
 import { BikeIcon, Heart, Star, TimerIcon } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { MouseEvent, useState, useTransition } from "react";
 
 type RestaurantItemData = Omit<Restaurant, "deliveryFee"> & {
   deliveryFee: number | Restaurant["deliveryFee"];
+  isFavorited?: boolean;
 };
 
 interface RestaurantItemProps {
   restaurant: RestaurantItemData;
   className?: string;
+  onFavoriteChange?: (isFavorited: boolean) => void;
 }
 
-const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
+const RestaurantItem = ({
+  restaurant,
+  className,
+  onFavoriteChange,
+}: RestaurantItemProps) => {
+  const { status } = useSession();
+  const [isFavorited, setIsFavorited] = useState(
+    Boolean(restaurant.isFavorited),
+  );
+  const [isPending, startTransition] = useTransition();
+
+  const handleFavoriteClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (status !== "authenticated") {
+      signIn();
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        const response = await toggleFavoriteRestaurant(restaurant.id);
+        setIsFavorited(response.isFavorited);
+        onFavoriteChange?.(response.isFavorited);
+      } catch (error) {
+        console.error("Erro ao favoritar restaurante", error);
+      }
+    });
+  };
+
   return (
     <Link href={`/restaurants/${restaurant.id}`}>
       <div className="space-y-3 mt-4">
@@ -30,8 +67,21 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
             <Star className="fill-yellow-500 text-yellow-500" size={16} />
             <span className="text-xs font-semibold text-black">5.0</span>
           </Badge>
-          <Button className="absolute top-2 right-2 bg-gray-700 rounded-full h-7 w-7">
-            <Heart className="fill-white" size={12} />
+          <Button
+            type="button"
+            disabled={isPending}
+            onClick={handleFavoriteClick}
+            className="absolute top-2 right-2 bg-gray-700 rounded-full h-7 w-7"
+          >
+            <Heart
+              className={cn(
+                "transition-colors",
+                isFavorited
+                  ? "fill-red-500 text-red-500"
+                  : "fill-white text-white",
+              )}
+              size={12}
+            />
           </Button>
         </div>
         <div className="flex flex-col space-y-1">
