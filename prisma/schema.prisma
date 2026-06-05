@@ -8,14 +8,15 @@ datasource db {
 }
 
 model Restaurant {
-  id                  String     @id @default(uuid())
+  id                  String                    @id @default(uuid())
   name                String
   imageUrl            String
-  deliveryFee         Decimal    @db.Decimal(10, 2)
+  deliveryFee         Decimal                   @db.Decimal(10, 2)
   deliveryTimeMinutes Int
   categories          Category[]
   products            Product[]
   orders              Order[]
+  favoriteRestaurants UserFavoriteRestaurants[]
 }
 
 model Category {
@@ -75,14 +76,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  orders        Order[]
+  id                          String                    @id @default(cuid())
+  name                        String?
+  email                       String?                   @unique
+  emailVerified               DateTime?                 @map("email_verified")
+  image                       String?
+  accounts                    Account[]
+  sessions                    Session[]
+  orders                      Order[]
+  usersWhoFavoriteRestaurants UserFavoriteRestaurants[]
 
   @@map("users")
 }
@@ -122,6 +124,17 @@ model Order {
   createdAt      DateTime       @default(now())
   status         OrderStatus    @default(CONFIRMED)
   orderProducts  OrderProduct[]
+}
+
+model UserFavoriteRestaurants {
+  id           String     @id @default(uuid())
+  userId       String
+  restaurantId String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, restaurantId])
+  @@map("favoriteRestaurant")
 }
 
 enum OrderStatus {

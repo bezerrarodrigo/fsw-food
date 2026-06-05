@@ -124,11 +124,17 @@ const Header = () => {
               <Button
                 variant="ghost"
                 className="space-x-3 w-full justify-start rounded-full"
+                asChild
               >
-                <HeartIcon size={16} />
-                <span className="block text-sm font-normal">
-                  Restaurantes favoritos
-                </span>
+                <Link
+                  href="/my-favorites-restaurants"
+                  className="flex items-center space-x-3"
+                >
+                  <HeartIcon size={16} />
+                  <span className="block text-sm font-normal">
+                    Restaurantes favoritos
+                  </span>
+                </Link>
               </Button>
               <div>
                 <Separator className="my-4" />
