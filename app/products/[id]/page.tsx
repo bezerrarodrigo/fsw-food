@@ -52,6 +52,7 @@ const ProductInfo = async ({ params }: ProductInfoProps) => {
     discountPercentage: product.discountPercentage,
     restaurantId: product.restaurantId,
     categoryId: product.categoryId,
+    orderId: product.orderId,
     createdAt: product.createdAt,
     restaurant: {
       id: product.restaurant.id,

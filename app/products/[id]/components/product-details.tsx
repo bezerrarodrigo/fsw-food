@@ -41,6 +41,7 @@ interface ComplementaryProduct {
 interface ProductDetailsProps {
   product: SerializedProduct & {
     restaurant: {
+      id: string;
       imageUrl: string;
       name: string;
       deliveryFee: number;

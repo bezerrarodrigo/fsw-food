@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Header from "../components/header";
 import RestaurantItem from "../components/restaurant-item";
 import { searchForRestaurants } from "./_actions/page";
@@ -10,7 +10,7 @@ type SearchedRestaurant = Awaited<
   ReturnType<typeof searchForRestaurants>
 >[number];
 
-const Restaurants = () => {
+const RestaurantsContent = () => {
   const searchParams = useSearchParams();
   const searchFor = searchParams.get("search");
 
@@ -50,6 +50,14 @@ const Restaurants = () => {
         </div>
       </div>
     </>
+  );
+};
+
+const Restaurants = () => {
+  return (
+    <Suspense fallback={<div className="px-5 py-4">Carregando...</div>}>
+      <RestaurantsContent />
+    </Suspense>
   );
 };
 
